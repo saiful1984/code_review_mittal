@@ -1,0 +1,12 @@
+flowchart LR
+    subgraph Traditional
+        linters[Traditional Linters]
+        static[Static Analysis Tools]
+    end
+    
+    subgraph CodeSage_Platform
+        codesage[CodeSage]
+    end
+    
+    linters -->|Evolved Beyond Syntax| codesage
+    static -->|Evolved Beyond Rules| codesage

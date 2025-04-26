@@ -1,0 +1,31 @@
+graph TD
+    subgraph External
+        github[GitHub Repo]
+    end
+
+    subgraph Core_Services
+        webhook[Webhook Server]
+        pr_fetcher[PR Diff Fetcher]
+        analyzer[LLM Code Analyzer]
+        feedback[Feedback Generator]
+        github_commenter[GitHub Commenter]
+        email_sender[Email Sender]
+    end
+
+    subgraph Advanced_Features
+        repo_connector[Repo Connector]
+        context_analyzer[Contextual Analysis]
+        learning_module[Team Learning Loop]
+        metrics_module[Metrics & Insights]
+    end
+
+    github -->|PR Events| webhook
+    webhook -->|Trigger| pr_fetcher
+    pr_fetcher -->|PR Diffs| analyzer
+    analyzer -->|Code Context| context_analyzer
+    context_analyzer -->|Analysis| feedback
+    feedback -->|Comments| github_commenter
+    feedback -->|Email| email_sender
+    context_analyzer -->|Updates| learning_module
+    learning_module -->|Improve| analyzer
+    context_analyzer -->|Metrics| metrics_module
