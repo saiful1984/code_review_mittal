@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --primary: 222 89% 41%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 100% 50%;
+  --secondary-foreground: 0 0% 100%;
+  --accent: 210 40% 96%;
+  --accent-foreground: 222 47% 11%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+  --ring: 222 89% 41%;
+  --radius: 0.5rem;
+  
+  /* For the charts */
+  --chart-1: 222 89% 41%;
+  --chart-2: 210 100% 50%;
+  --chart-3: 259 94% 51%;
+  --chart-4: 326 100% 74%;
+  --chart-5: 32 94% 69%;
+}
+
+.dark {
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --primary: 222 89% 41%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 100% 50%;
+  --secondary-foreground: 0 0% 100%;
+  --accent: 210 40% 96%;
+  --accent-foreground: 222 47% 11%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+  --ring: 222 89% 41%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', monospace;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', 'SF Pro Display', system-ui, sans-serif;
+    @apply font-semibold;
+  }
+
+  code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', monospace;
+  }
+}
+
+/* Animation keyframes */
+@keyframes dash {
+  to {
+    stroke-dashoffset: 1000;
+  }
+}
+
+@keyframes blink {
+  from, to { opacity: 1 }
+  50% { opacity: 0 }
+}
+
+/* Custom styles */
+.diagram-line {
+  stroke: hsl(var(--secondary));
+  stroke-width: 2;
+  stroke-dasharray: 5;
+  fill: none;
+  animation: dash 30s linear infinite;
+}
+
+.node {
+  transition: all 0.3s ease;
+}
+
+.node:hover {
+  transform: translateY(-5px);
+  filter: drop-shadow(0 0 8px rgba(100, 255, 218, 0.4));
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: 0.5rem;
+  background: linear-gradient(to right, hsl(var(--secondary)), hsl(var(--primary)));
+  padding: 1px;
+}
+
+.gradient-border > div {
+  background: hsl(var(--background));
+  border-radius: 0.5rem;
+}
+
+.typing-animation::after {
+  content: '|';
+  animation: blink 1s step-end infinite;
+}

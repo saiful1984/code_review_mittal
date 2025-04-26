@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Details - CodeSage Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #5bc2e7;
+            --secondary-color: #8ed8f8;
+            --dark-bg: #1a1a2e;
+            --panel-bg: #22223b;
+            --text-color: #e6e6e6;
+            --border-color: rgba(91, 194, 231, 0.3);
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
+            --code-bg: #2d2d44;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .review-header {
+            background-color: var(--panel-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .review-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .review-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .meta-label {
+            font-size: 0.9em;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+        
+        .meta-value {
+            font-weight: 600;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        
+        .status-completed {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: var(--success-color);
+        }
+        
+        .status-in-progress {
+            background-color: rgba(255, 152, 0, 0.2);
+            color: var(--warning-color);
+        }
+        
+        .comments-section {
+            background-color: var(--panel-bg);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .comments-header {
+            margin-bottom: 20px;
+        }
+        
+        .comment-card {
+            background-color: rgba(45, 45, 68, 0.5);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid;
+        }
+        
+        .comment-card.high {
+            border-left-color: var(--danger-color);
+        }
+        
+        .comment-card.medium {
+            border-left-color: var(--warning-color);
+        }
+        
+        .comment-card.low {
+            border-left-color: var(--success-color);
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .file-icon {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .file-path {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+        }
+        
+        .line-number {
+            background-color: var(--code-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        
+        .severity-badge {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .severity-high {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: var(--danger-color);
+        }
+        
+        .severity-medium {
+            background-color: rgba(255, 152, 0, 0.2);
+            color: var(--warning-color);
+        }
+        
+        .severity-low {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: var(--success-color);
+        }
+        
+        .comment-content {
+            line-height: 1.8;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+        
+        .back-link i {
+            margin-right: 5px;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            margin-top: 50px;
+            padding: 20px 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 0.9em;
+            color: rgba(230, 230, 230, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="/static/codesage-logo-small.svg" alt="CodeSage Logo">
+                <h1>CodeSage Dashboard</h1>
+            </div>
+            <div class="user-info">
+                <img src="https://ui-avatars.com/api/?name={{ user.full_name }}&background=5bc2e7&color=1a1a2e" alt="User Avatar">
+                <span>{{ user.full_name }}</span>
+            </div>
+        </header>
+        
+        <a href="/dashboard" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+        
+        <div class="review-header">
+            <div class="review-title">
+                <h2>{{ review.title }}</h2>
+                <span class="status-badge status-{{ review.status }}">
+                    {{ review.status|replace("_", " ")|title }}
+                </span>
+            </div>
+            <div class="review-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Repository</span>
+                    <span class="meta-value">{{ review.repo }}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Pull Request</span>
+                    <span class="meta-value">#{{ review.pr_number }}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Author</span>
+                    <span class="meta-value">{{ review.author }}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Created</span>
+                    <span class="meta-value">{{ review.created_at.split('T')[0] }}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Completed</span>
+                    <span class="meta-value">{{ review.completed_at.split('T')[0] if review.completed_at else 'In Progress' }}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Issues Found</span>
+                    <span class="meta-value">{{ review.issues_found or 'N/A' }}</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="comments-section">
+            <div class="comments-header">
+                <h2>Review Comments</h2>
+            </div>
+            
+            {% for comment in comments %}
+            <div class="comment-card {{ comment.severity }}">
+                <div class="comment-header">
+                    <div class="file-info">
+                        <div class="file-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="file-path">{{ comment.file }}</div>
+                        <div class="line-number">Line {{ comment.line }}</div>
+                    </div>
+                    <div class="severity-badge severity-{{ comment.severity }}">
+                        {{ comment.severity }}
+                    </div>
+                </div>
+                <div class="comment-content">
+                    {{ comment.comment }}
+                </div>
+            </div>
+            {% endfor %}
+            
+            {% if not comments %}
+            <p>No comments found for this review.</p>
+            {% endif %}
+        </div>
+        
+        <footer class="footer">
+            <p>&copy; 2023 CodeSage - AI-powered code review platform</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Simple JavaScript for interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any client-side functionality here
+            console.log('Review details loaded');
+        });
+    </script>
+</body>
+</html>
