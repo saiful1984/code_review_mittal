@@ -1,0 +1,32 @@
+product: CodeSage - Smarter Code Reviews (Powered by AI)
+
+github: GitHub Repo
+webhook_server: Webhook Server (FastAPI or Lambda)
+pr_fetcher: PR Diff Fetcher
+analyzer: LLM Code Analyzer
+feedback: Feedback Generator
+github_commenter: GitHub Commenter
+email_sender: Email Sender
+
+repo_connector: Repo Connector (GitHub, GitLab, Bitbucket)
+context_analyzer: Contextual + Historical Analysis
+learning_module: Team Learning Loop
+metrics_module: Metrics & Insights Engine
+
+github -> webhook_server: Sends PR Events (Opened, Updated)
+webhook_server -> pr_fetcher: Triggers PR Diff Fetch
+pr_fetcher -> analyzer: Send PR Diffs
+analyzer -> context_analyzer: Understand Code + History
+context_analyzer -> feedback: Generate Review Feedback
+feedback -> github_commenter: Post Review Comments
+feedback -> email_sender: Send Review Email
+context_analyzer -> learning_module: Updates Learning Model
+learning_module -> analyzer: Improve Suggestions over Time
+context_analyzer -> metrics_module: Track Review Metrics
+
+Traditional_Linters: Traditional Linters
+Static_Tools: Static Code Analysis Tools
+CodeSage: CodeSage (Contextual, Learning-Based)
+
+Traditional_Linters -> CodeSage: Evolved Beyond Syntax Checking
+Static_Tools -> CodeSage: Evolved Beyond Generic Rules
